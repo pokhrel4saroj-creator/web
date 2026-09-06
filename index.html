@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saroj Pokhrel | सरोज पोख्रेल</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;600;800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* साविकको पूर्ण डिजाइन सुरक्षित राखिएको छ */
+        :root { --primary: #003366; --accent: #c5a028; --white: #ffffff; --overlay: rgba(0, 31, 63, 0.75); }
+        body { font-family: 'Mukta', 'Poppins', sans-serif; margin: 0; padding: 0; background: #f4f7f6; user-select: none; -webkit-user-select: none; overflow-x: hidden; }
+        @media print { body { display: none; } }
+        header { background: var(--white); box-shadow: 0 4px 12px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        nav { max-width: 1400px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding: 0 25px; }
+        .logo-box img { height: 65px; width: auto; object-fit: contain; padding: 5px 0; }
+        .nav-right { display: flex; align-items: center; }
+        .menu { display: flex; list-style: none; margin: 0; padding: 0; }
+        .menu > li { position: relative; }
+        .menu > li > a { padding: 30px 18px; display: block; text-decoration: none; color: var(--primary); font-weight: 600; font-size: 20px; cursor: pointer; }
+        .submenu { position: absolute; background: white; min-width: 250px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); list-style: none; padding: 0; display: none; border-top: 3px solid var(--accent); left: 0; }
+        .menu li:hover > .submenu { display: block; }
+        .submenu li { border-bottom: 1px solid #f1f1f1; position: relative; }
+        .submenu li a { padding: 12px 18px; display: block; text-decoration: none; color: #333; font-size: 16px; }
+        .sub-submenu { position: absolute; left: 100%; top: -3px; background: white; min-width: 240px; display: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 3px solid var(--accent); list-style: none; padding: 0; }
+        .submenu li:hover > .sub-submenu { display: block; }
+        .menu li:nth-last-child(-n+3) .sub-submenu { left: auto; right: 100%; }
+        .lang-switch { display: flex; margin-left: 20px; border: 1px solid #ddd; border-radius: 20px; overflow: hidden; background: #eee; }
+        .lang-btn { cursor: pointer; padding: 5px 15px; font-size: 13px; font-weight: 800; color: #555; transition: 0.3s; }
+        .lang-btn.active { background: var(--accent); color: white; }
+        .hero { position: relative; background-size: cover; background-position: center; background-attachment: fixed; padding: 100px 8%; display: flex; align-items: center; justify-content: flex-start; color: white; gap: 40px; flex-wrap: wrap; }
+        .hero::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--overlay); z-index: 1; }
+        .hero-photo { width: 250px; height: 250px; border-radius: 50%; border: 6px solid var(--accent); object-fit: cover; box-shadow: 0 10px 40px rgba(0,0,0,0.5); position: relative; z-index: 2; }
+        .hero-content { position: relative; z-index: 2; text-align: left; }
+        .hero-content h1 { font-size: 4.5rem; margin: 0; font-weight: 800; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        .hero-content p { font-size: 2rem; color: var(--accent); margin: 10px 0; font-weight: 400; }
+        .dashboard-container { max-width: 1200px; margin: -60px auto 60px; display: flex; flex-wrap: wrap; gap: 25px; position: relative; z-index: 3; padding: 0 20px; }
+        .dashboard-col { flex: 1; min-width: 350px; background: white; padding: 35px; border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        .col-title { font-size: 24px; color: var(--primary); border-bottom: 3px solid var(--accent); padding-bottom: 12px; margin-bottom: 25px; display: flex; align-items: center; gap: 12px; font-weight: 800; }
+        .item-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #eee; }
+        .btn-dl { background: var(--accent); color: white; padding: 8px 18px; border-radius: 5px; text-decoration: none; font-size: 13px; font-weight: 600; cursor: pointer; border: none; }
+        .media-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin-top: 20px; }
+        .media-card { background: #000; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .media-card img, .media-card iframe { width: 100%; height: 210px; object-fit: cover; border: none; }
+        .media-title { padding: 10px; background: #fff; color: #333; font-weight: 600; text-align: center; }
+        .feedback-box input, .feedback-box textarea { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; font-size: 15px; box-sizing: border-box; }
+        .btn-submit { background: var(--primary); color: white; padding: 15px 30px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; font-size: 16px; }
+
+        /* Admin Dashboard UI */
+        #admin-view { display: none; background: #f0f4f8; min-height: 100vh; padding: 20px; user-select: auto; }
+        .admin-container { max-width: 1100px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 25px rgba(0,0,0,0.1); }
+        .admin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 20px; }
+        .admin-box { background: #fafafa; padding: 20px; border: 1px solid #ddd; border-radius: 10px; margin-bottom: 10px; }
+        .admin-box h3 { color: #003366; border-bottom: 2px solid #c5a028; padding-bottom: 8px; margin-top: 0; display: flex; align-items: center; gap: 10px; }
+        .admin-input { width: 100%; padding: 12px; margin-top: 8px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-family: inherit; }
+        .admin-btn { background: #003366; color: white; cursor: pointer; border: none; font-weight: bold; padding: 12px; border-radius: 8px; width: 100%; margin-top: 10px; }
+        .admin-btn:hover { background: #c5a028; }
+        .list-item { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #eee; font-size: 14px; background: white; margin-top: 5px; }
+        .del { color: #d32f2f; cursor: pointer; font-weight: bold; }
+        
+        #login-overlay { position: fixed; inset: 0; background: var(--primary); z-index: 9999; display: none; align-items: center; justify-content: center; }
+        #content-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 5000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
+        .modal-box { background: white; width: 90%; max-width: 850px; padding: 45px; border-radius: 20px; position: relative; max-height: 80vh; overflow-y: auto; text-align: justify; line-height: 1.8; }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+
+<!-- १. मुख्य वेबसाइट (Website View) -->
+<div id="website-view">
+    <header>
+        <nav>
+            <div class="logo-box"><img id="ui-logo-img" src="" alt="Logo"></div>
+            <div class="nav-right">
+                <ul class="menu" id="ui-menu"></ul>
+                <div class="lang-switch">
+                    <span class="lang-btn active" id="btn-ne" onclick="changeLang('ne')">NE</span>
+                    <span class="lang-btn" id="btn-en" onclick="changeLang('en')">EN</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" id="ui-hero-bg">
+        <img src="" alt="Profile" class="hero-photo" id="ui-profile-pic">
+        <div class="hero-content">
+            <h1 id="ui-hero-name">सरोज पोख्रेल</h1>
+            <p id="ui-hero-tag"></p>
+        </div>
+    </section>
+
+    <div class="dashboard-container">
+        <div class="dashboard-col"><div class="col-title" id="ui-head-l4"><i class="fa fa-book-open"></i></div><div id="l4-list"></div></div>
+        <div class="dashboard-col"><div class="col-title" id="ui-head-l5"><i class="fa fa-file-signature"></i></div><div id="l5-list"></div></div>
+        <div class="dashboard-col"><div class="col-title" id="ui-head-art"><i class="fa fa-pen-nib"></i></div><div id="art-list"></div></div>
+        <div class="dashboard-col"><div class="col-title" id="ui-head-link"><i class="fa fa-link"></i></div><div id="link-list"></div></div>
+        <div class="dashboard-col" style="flex: 100%;"><div class="col-title" id="ui-head-memo"><i class="fa fa-camera-retro"></i></div><div id="memo-intro" style="margin-bottom: 20px; color:#555;"></div><div class="media-grid" id="media-list"></div></div>
+        <div class="dashboard-col feedback-box" style="flex: 100%;"><div class="col-title" id="ui-head-feed"><i class="fa fa-envelope-open-text"></i></div><div style="max-width: 650px; margin: auto;"><div style="display: flex; gap: 15px;"><input type="text" id="f-name" placeholder=""><input type="email" id="f-email" placeholder=""></div><textarea id="f-msg" placeholder=""></textarea><button onclick="sendFeed()" class="btn-submit" id="ui-btn-feed"></button></div></div>
+    </div>
+
+    <footer style="text-align: center; padding: 40px; background: #eee; cursor: pointer;" onclick="openAdminPortal()">
+        <p>&copy; २०२४ सरोज पोख्रेल | <i class="fa fa-lock"></i> Admin Dashboard</p>
+    </footer>
+</div>
+
+<!-- २. लगइन ओभरले -->
+<div id="login-overlay">
+    <div style="background: white; padding: 40px; border-radius: 15px; width: 320px; text-align: center;">
+        <h2 style="color: var(--primary);">Admin Login</h2>
+        <input type="password" id="adminPass" placeholder="पासवर्ड टाइप गर्नुहोस्..." class="admin-input" style="text-align: center; font-size: 22px;">
+        <button onclick="verifyAdmin()" class="admin-btn">Login</button>
+        <p onclick="location.hash=''" style="margin-top: 15px; cursor: pointer; color: #666;">वेबसाइटमा फर्कनुहोस्</p>
+    </div>
+</div>
+
+<!-- ३. एडमिन ड्यासबोर्ड (६ खण्ड जस्ताको तस्तै) -->
+<div id="admin-view">
+    <div class="admin-container">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #c5a028; margin-bottom: 20px;">
+            <h2 style="margin:0; color:#003366;"><i class="fa fa-user-shield"></i> सरोज पोख्रेल - Admin Panel</h2>
+            <button onclick="location.hash=''; location.reload();" style="background:#666; color:white; border:none; padding:8px 15px; border-radius:5px; cursor:pointer;">Logout</button>
+        </div>
+        
+        <div class="admin-grid">
+            <!-- १. फोटो व्यवस्थापन Dropdown -->
+            <div class="admin-box">
+                <h3><i class="fa fa-image"></i> १. फोटो व्यवस्थापन</h3>
+                <select id="adm-photo-type" class="admin-input">
+                    <option value="logoImg">Website Logo</option>
+                    <option value="profilePic">Profile Photo</option>
+                    <option value="heroBg">Background Hero Image</option>
+                </select>
+                <input type="text" id="adm-photo-url" class="admin-input" placeholder="फोटोको 'Direct Link' यहाँ पेस्ट गर्नुहोस् (URL)...">
+                <button class="admin-btn" onclick="updatePhoto()">Update Selected Photo</button>
+            </div>
+
+            <!-- २. मेनु विवरण -->
+            <div class="admin-box">
+                <h3><i class="fa fa-edit"></i> २. मेनु विवरण (Manual Text)</h3>
+                <select id="p-cat" class="admin-input">
+                    <option value="personal">व्यक्तिगत विवरण</option><option value="academic">शैक्षिक विवरण</option>
+                    <option value="professional">व्यावसायिक विवरण</option><option value="others">अन्य विवरण</option>
+                    <option value="memoirs">संस्मरण भूमिका</option><option value="address">ठेगाना</option>
+                    <option value="pub">मेरो प्रकाशन</option><option value="psc_art">लोक सेवा लेख</option>
+                    <option value="l4_psc">खरिदार PSC</option><option value="l4_ppsc">खरिदार PPSC</option>
+                    <option value="l5_psc">नासु PSC</option><option value="l5_ppsc">नासु PPSC</option>
+                </select>
+                <textarea id="p-ne" class="admin-input" placeholder="नेपाली विवरण यहाँ लेख्नुहोस्..." style="height: 60px;"></textarea>
+                <textarea id="p-en" class="admin-input" placeholder="English description here..." style="height: 60px;"></textarea>
+                <button class="admin-btn" onclick="savePageText()">Save Changes</button>
+            </div>
+
+            <!-- ३. संस्मरण मिडिया -->
+            <div class="admin-box">
+                <h3><i class="fa fa-camera"></i> ३. संस्मरण मिडिया</h3>
+                <input type="text" id="m-title" class="admin-input" placeholder="मिडियाको शीर्षक (उदा: विदाई समारोह)...">
+                <select id="m-type" class="admin-input"><option value="image">फोटो (Image URL)</option><option value="video">भिडियो (YouTube URL)</option></select>
+                <input type="text" id="m-url" class="admin-input" placeholder="फोटो वा भिडियोको लिङ्क यहाँ पेस्ट गर्नुहोस्...">
+                <button class="admin-btn" onclick="saveMemMedia()">Add to Memoirs</button>
+            </div>
+
+            <!-- ४. सामग्री थप्ने -->
+            <div class="admin-box">
+                <h3><i class="fa fa-cloud-upload-alt"></i> ४. सामग्री थप्नुहोस् (Files/Links)</h3>
+                <input type="text" id="f-title" class="admin-input" placeholder="शीर्षक (उदा: नासु पाठ्यक्रम २०८१)...">
+                <select id="f-cat" class="admin-input">
+                    <option value="syllabus-l4">खरिदार पाठ्यक्रम</option><option value="syllabus-l5">नासु पाठ्यक्रम</option>
+                    <option value="articles">लेख/रचना</option><option value="links">महत्वपूर्ण लिङ्क</option>
+                </select>
+                <input type="text" id="f-url" class="admin-input" placeholder="फाइल वा वेब लिङ्क यहाँ हाल्नुहोस् (URL)...">
+                <button class="admin-btn" onclick="saveFileItem()">Upload Now</button>
+            </div>
+
+            <!-- ५. व्यवस्थापन (Delete) -->
+            <div class="admin-box">
+                <h3><i class="fa fa-tasks"></i> ५. सामग्री व्यवस्थापन (Manage)</h3>
+                <select id="man-cat" class="admin-input" onchange="loadAdmList()">
+                    <option value="items/syllabus-l4">खरिदार पाठ्यक्रम</option><option value="items/syllabus-l5">नासु पाठ्यक्रम</option>
+                    <option value="items/articles">लेख/रचनाहरु</option><option value="items/links">लिङ्कहरु</option>
+                    <option value="memoirs_media">संस्मरण मिडियाहरु</option>
+                </select>
+                <div id="man-list" style="margin-top:15px; max-height:200px; overflow-y:auto;"></div>
+            </div>
+
+            <!-- ६. सुझाव खण्ड -->
+            <div class="admin-box">
+                <h3><i class="fa fa-comment-dots"></i> ६. दर्शकका सुझाव तथा प्रतिक्रिया</h3>
+                <div id="feed-list" style="max-height: 350px; overflow-y: auto; font-size: 14px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Structure -->
+<div id="content-modal"><div class="modal-box"><span onclick="closeModal()" style="position:absolute; right:25px; top:15px; font-size:35px; cursor:pointer;">&times;</span><h2 id="modal-title" style="color:var(--primary); border-bottom:3px solid var(--accent); padding-bottom:10px;"></h2><div id="modal-body"></div></div></div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+    import { getDatabase, ref, onValue, push, set, remove, update } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyC34SOSbtr835HJLQPZrQI1oaRpa7N1kaA",
+        authDomain: "saroj-pokhrel.firebaseapp.com",
+        databaseURL: "https://saroj-pokhrel-default-rtdb.asia-southeast1.firebasedatabase.app/",
+        projectId: "saroj-pokhrel",
+        storageBucket: "saroj-pokhrel.firebasestorage.app",
+        messagingSenderId: "471184765077",
+        appId: "1:471184765077:web:381b181bcb9380c13deb9c"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    let lang = 'ne';
+
+    // "लोकसेवा सहयात्री" & PSC Companion with Placeholders
+    const trans = {
+        ne: { 
+            name: "सरोज पोख्रेल", tag: "लोकसेवा सहयात्री", l4: "खरिदार पाठ्यक्रम", l5: "नासु पाठ्यक्रम", art: "लेख तथा रचनाहरु", link: "महत्वपूर्ण लिङ्कहरु", memo: "संस्मरण", feed: "गुनासो तथा सुझाव", btn_view: "हेर्नुहोस्", btn_send: "पठाउनुहोस्", no_data: "सामग्री छैन।", loading: "लोड हुँदैछ...",
+            placeholder_name: "तपाईँको नाम (अनिवार्य)", placeholder_email: "तपाईँको इमेल (अनिवार्य)", placeholder_msg: "सन्देश यहाँ लेख्नुहोस्...",
+            m1: "परिचय", m1s: ["व्यक्तिगत विवरण", "शैक्षिक विवरण", "व्यावसायिक विवरण", "अन्य विवरण"],
+            m2: "शिक्षण सामग्री", m2s: ["खरिदार वा सो सरह", "नायब सुब्बा वा सो सरह"],
+            m2ss: ["खरिदार पाठ्यक्रम", "खरिदार सामग्री लोक सेवा", "खरिदार सामग्री प्रदेश", "नासु पाठ्यक्रम", "नासु सामग्री लोक सेवा", "नासु सामग्री प्रदेश"],
+            m3: "लेख/रचना", m3s: ["मेरो प्रकाशन", "लोक सेवा लेख", "संस्मरण"],
+            m4: "सम्पर्क", m4s: ["ठेगाना", "सुझाव फारम"]
+        },
+        en: { 
+            name: "Saroj Pokhrel", tag: "PSC Companion", l4: "L4 Syllabus", l5: "L5 Syllabus", art: "Articles", link: "Important Links", memo: "Memoirs", btn_view: "View", btn_send: "Send Now", no_data: "No content available.", loading: "Loading...",
+            placeholder_name: "Full Name (Required)", placeholder_email: "Email (Required)", placeholder_msg: "Write your message here...",
+            m1: "Introduction", m1s: ["Personal", "Academic", "Professional", "Others"],
+            m2: "Materials", m2s: ["Assistant L4", "Assistant L5"],
+            m2ss: ["L4 Syllabus", "PSC Material", "PPSC Material", "L5 Syllabus", "PSC Material", "PPSC Material"],
+            m3: "Articles", m3s: ["Publication", "PSC Articles", "Captures"],
+            m4: "Contact", m4s: ["Address", "Feedback"]
+        }
+    };
+
+    // Global Functions for GitHub and routing
+    window.changeLang = (l) => {
+        lang = l;
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('btn-'+l).classList.add('active');
+        const d = trans[l];
+
+        document.getElementById('ui-hero-name').innerText = d.name;
+        document.getElementById('ui-hero-tag').innerText = d.tag;
+        document.getElementById('ui-head-l4').innerHTML = `<i class="fa fa-book-open"></i> ${d.l4}`;
+        document.getElementById('ui-head-l5').innerHTML = `<i class="fa fa-file-signature"></i> ${d.l5}`;
+        document.getElementById('ui-head-art').innerHTML = `<i class="fa fa-pen-nib"></i> ${d.art}`;
+        document.getElementById('ui-head-link').innerHTML = `<i class="fa fa-link"></i> ${d.link}`;
+        document.getElementById('ui-head-memo').innerHTML = `<i class="fa fa-camera-retro"></i> ${d.memo}`;
+        document.getElementById('ui-head-feed').innerHTML = `<i class="fa fa-envelope-open-text"></i> ${d.feed}`;
+        document.getElementById('ui-btn-feed').innerText = d.btn_send;
+        
+        // Dim Placeholders Restore
+        document.getElementById('f-name').placeholder = d.placeholder_name;
+        document.getElementById('f-email').placeholder = d.placeholder_email;
+        document.getElementById('f-msg').placeholder = d.placeholder_msg;
+
+        document.getElementById('ui-menu').innerHTML = `
+            <li><a>${d.m1}</a><ul class="submenu">
+                <li><a onclick="show('personal','${d.m1s[0]}')">${d.m1s[0]}</a></li>
+                <li><a onclick="show('academic','${d.m1s[1]}')">${d.m1s[1]}</a></li>
+                <li><a onclick="show('professional','${d.m1s[2]}')">${d.m1s[2]}</a></li>
+                <li><a onclick="show('others','${d.m1s[3]}')">${d.m1s[3]}</a></li>
+            </ul></li>
+            <li><a>${d.m2}</a><ul class="submenu">
+                <li><a>${d.m2s[0]} <i class="fa fa-caret-left" style="float:left; margin-right:10px;"></i></a>
+                    <ul class="sub-submenu">
+                        <li><a onclick="scrollToId('ui-head-l4')">${d.m2ss[0]}</a></li>
+                        <li><a onclick="show('l4_psc','PSC')">${d.m2ss[1]}</a></li>
+                        <li><a onclick="show('l4_ppsc','PPSC')">${d.m2ss[2]}</a></li>
+                    </ul>
+                </li>
+                <li><a>${d.m2s[1]} <i class="fa fa-caret-left" style="float:left; margin-right:10px;"></i></a>
+                    <ul class="sub-submenu">
+                        <li><a onclick="scrollToId('ui-head-l5')">${d.m2ss[3]}</a></li>
+                        <li><a onclick="show('l5_psc','PSC')">${d.m2ss[4]}</a></li>
+                        <li><a onclick="show('l5_ppsc','PPSC')">${d.m2ss[5]}</a></li>
+                    </ul>
+                </li>
+            </ul></li>
+            <li><a>${d.m3}</a><ul class="submenu">
+                <li><a onclick="show('pub','${d.m3s[0]}')">${d.m3s[0]}</a></li>
+                <li><a onclick="show('psc_art','${d.m3s[1]}')">${d.m3s[1]}</a></li>
+                <li><a onclick="scrollToId('ui-head-memo')">${d.m3s[2]}</a></li>
+            </ul></li>
+            <li><a>${d.m4}</a><ul class="submenu">
+                <li><a onclick="show('address','Address')">${d.m4s[0]}</a></li>
+                <li><a onclick="scrollToId('ui-head-feed')">${d.m4s[1]}</a></li>
+            </ul></li>
+        `;
+        loadItems('syllabus-l4', 'l4-list'); loadItems('syllabus-l5', 'l5-list');
+        loadItems('articles', 'art-list'); loadItems('links', 'link-list');
+        onValue(ref(db, 'pages/memoirs'), (snap) => { const v = snap.val(); document.getElementById('memo-intro').innerText = v ? v[lang] : ""; });
+    };
+
+    onValue(ref(db, 'settings'), (snap) => {
+        const s = snap.val(); if(s) {
+            document.getElementById('ui-logo-img').src = s.logoImg;
+            document.getElementById('ui-profile-pic').src = s.profilePic;
+            document.getElementById('ui-hero-bg').style.backgroundImage = `url('${s.heroBg}')`;
+        }
+    });
+
+    const loadItems = (p, id) => {
+        document.getElementById(id).innerHTML = `<p style='color:#999'>${trans[lang].loading}</p>`;
+        onValue(ref(db, 'items/'+p), (snap) => {
+            let h = ""; const d = snap.val();
+            if(!d) { document.getElementById(id).innerHTML = `<p style='color:#999'>${trans[lang].no_data}</p>`; return; }
+            for(let i in d) h += `<div class="item-row"><span>${d[i].title}</span><a href="${d[i].url}" target="_blank" class="btn-dl">${trans[lang].btn_view}</a></div>`;
+            document.getElementById(id).innerHTML = h;
+        });
+    };
+
+    onValue(ref(db, 'memoirs_media'), (snap) => {
+        let h = ""; const d = snap.val();
+        for(let id in d) {
+            const m = d[id]; h += `<div class="media-card">`;
+            if(m.type==='image') h+=`<img src="${m.url}">`; else h+=`<iframe src="${m.url.replace('watch?v=', 'embed/')}"></iframe>`;
+            h += `<div class="media-title">${m.title}</div></div>`;
+        }
+        document.getElementById('media-list').innerHTML = h || `<p style='color:#999'>मिडिया छैन।</p>`;
+    });
+
+    // Attachment
+    window.show = (c, t) => {
+        document.getElementById('content-modal').style.display = 'flex';
+        document.getElementById('modal-title').innerText = t;
+        onValue(ref(db, 'pages/'+c), (snap) => {
+            const v = snap.val(); document.getElementById('modal-body').innerText = v ? v[lang] : "सामग्री उपलब्ध छैन।";
+        });
+    };
+    window.closeModal = () => document.getElementById('content-modal').style.display='none';
+    window.scrollToId = (id) => document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    window.sendFeed = () => {
+        const n = document.getElementById('f-name').value, e = document.getElementById('f-email').value, m = document.getElementById('f-msg').value;
+        if(n && e && m) push(ref(db, 'feedbacks'), {name:n, email:e, message:m, date: new Date().toLocaleString()}).then(()=> {
+            alert("Sent!");
+            document.getElementById('f-name').value=''; document.getElementById('f-email').value=''; document.getElementById('f-msg').value='';
+        }); else alert("सबै विवरण भर्नुहोस्।");
+    };
+
+    // --- Admin Routing & Logic ---
+    window.openAdminPortal = () => {
+        window.open(window.location.origin + window.location.pathname + "#admin", '_blank');
+    };
+
+    const handleRoute = () => {
+        if(window.location.hash === "#admin") {
+            document.getElementById('website-view').style.display = 'none';
+            document.getElementById('login-overlay').style.display = 'flex';
+            document.getElementById('admin-view').style.display = 'none';
+        } else {
+            document.getElementById('website-view').style.display = 'block';
+            document.getElementById('login-overlay').style.display = 'none';
+            document.getElementById('admin-view').style.display = 'none';
+            window.changeLang('ne');
+        }
+    };
+
+    window.verifyAdmin = () => {
+        if(document.getElementById('adminPass').value === "admin123") {
+            document.getElementById('login-overlay').style.display = 'none';
+            document.getElementById('admin-view').style.display = 'block';
+            window.loadAdmList();
+        } else alert("गलत पासवर्ड !");
+    };
+
+    // Admin Save Functions
+    window.updatePhoto = () => {
+        const type = document.getElementById('adm-photo-type').value;
+        const url = document.getElementById('adm-photo-url').value;
+        if(url) {
+            const obj = {}; obj[type] = url;
+            update(ref(db, 'settings'), obj).then(() => { alert("Updated!"); document.getElementById('adm-photo-url').value=''; });
+        }
+    };
+
+    window.savePageText = () => {
+        const cat = document.getElementById('p-cat').value, ne = document.getElementById('p-ne').value, en = document.getElementById('p-en').value;
+        if(ne && en) set(ref(db, 'pages/'+cat), {ne, en}).then(()=>alert("Text Saved!"));
+    };
+
+    window.saveMemMedia = () => {
+        const title = document.getElementById('m-title').value, type = document.getElementById('m-type').value, url = document.getElementById('m-url').value;
+        if(title && url) push(ref(db, 'memoirs_media'), {title, type, url}).then(()=> { 
+            alert("Media Added!"); document.getElementById('m-title').value=''; document.getElementById('m-url').value='';
+        });
+    };
+
+    window.saveFileItem = () => {
+        const title = document.getElementById('f-title').value, url = document.getElementById('f-url').value, cat = document.getElementById('f-cat').value;
+        if(title && url) push(ref(db, 'items/'+cat), {title, url}).then(()=> {
+            alert("File Added!"); document.getElementById('f-title').value=''; document.getElementById('f-url').value='';
+        });
+    };
+
+    window.loadAdmList = () => {
+        const p = document.getElementById('man-cat').value;
+        onValue(ref(db, p), (snap) => {
+            let h = ""; const d = snap.val();
+            for(let id in d) h += `<div class="list-item"><span>${d[id].title}</span><span class="del" onclick="delItem('${p}','${id}')">मेटाउनुहोस्</span></div>`;
+            document.getElementById('man-list').innerHTML = h || "<p style='color:#999'>डाटा छैन।</p>";
+        });
+    };
+    window.delItem = (p, i) => { if(confirm("Are you sure?")) remove(ref(db, p+"/"+i)); };
+
+    onValue(ref(db, 'feedbacks'), (snap) => {
+        let h = ""; const d = snap.val();
+        if(!d) h = "<p style='color:#999; text-align:center;'>प्रतिक्रिया छैन।</p>";
+        else {
+            for(let id in d) h += `<div style="border:1px solid #ddd; padding:10px; margin-bottom:10px; border-radius:5px; position:relative;"><b>${d[id].name}</b>: ${d[id].message} <br><small style='color:#999'>${d[id].date}</small> <span class='del' onclick="delItem('feedbacks','${id}')" style='float:right'>[मेटाउनुहोस्]</span></div>`;
+        }
+        document.getElementById('feed-list').innerHTML = h;
+    });
+
+    window.addEventListener('hashchange', handleRoute);
+    window.onload = handleRoute;
+</script>
+</body>
+</html>
